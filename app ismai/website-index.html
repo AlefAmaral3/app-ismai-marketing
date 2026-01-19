@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Maieutica - Sua Vida Académica Simplificada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="website-styles.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>App Maieutica</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#sobre" class="nav-link" onclick="scrollToSection('sobre')">Sobre Nós</a></li>
+                <li><a href="#servicos" class="nav-link" onclick="scrollToSection('servicos')">Serviços</a></li>
+                <li><a href="#faq" class="nav-link" onclick="scrollToSection('faq')">FAQ</a></li>
+                <li><a href="#contacto" class="nav-link" onclick="scrollToSection('contacto')">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Bem-vindo à <span class="gradient-text">App Maieutica</span></h1>
+            <p class="hero-subtitle">Sua vida académica simplificada. Tudo que precisa em um único lugar.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('sobre')">Saber Mais</button>
+                <button class="btn btn-secondary" onclick="downloadApp()">Descarregar App</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Utilizadores Ativos</p>
+                </div>
+                <div class="stat">
+                    <h3>10+</h3>
+                    <p>Instituições</p>
+                </div>
+                <div class="stat">
+                    <h3>4.8★</h3>
+                    <p>Avaliação</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE NÓS -->
+    <section class="sobre" id="sobre">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <div class="sobre-content">
+                <div class="sobre-text">
+                    <h3>Quem Somos</h3>
+                    <p>A App Maieutica é uma solução inovadora criada para transformar a experiência académica dos estudantes. Desenvolvida em parceria com instituições de ensino, a aplicação centraliza todas as informações essenciais - horários, notas, comunicados e avisos - numa plataforma intuitiva e acessível.</p>
+                    
+                    <h3>Nossa Missão</h3>
+                    <p>Simplificar e melhorar a comunicação entre instituições de ensino e estudantes, proporcionando uma experiência digital integrada, eficiente e orientada para o sucesso académico.</p>
+
+                    <h3>Valores</h3>
+                    <ul class="valores-list">
+                        <li><i class="fas fa-check"></i> <strong>Inovação:</strong> Tecnologia ao serviço da educação</li>
+                        <li><i class="fas fa-check"></i> <strong>Acessibilidade:</strong> Fácil de usar para todos</li>
+                        <li><i class="fas fa-check"></i> <strong>Confiabilidade:</strong> Segurança dos dados prioritária</li>
+                        <li><i class="fas fa-check"></i> <strong>Sustentabilidade:</strong> Redução de papel e impacto ambiental</li>
+                    </ul>
+                </div>
+                <div class="sobre-features">
+                    <div class="feature-card">
+                        <i class="fas fa-leaf"></i>
+                        <h4>Sustentável</h4>
+                        <p>Eliminamos documentos em papel, reduzindo o impacto ambiental das instituições.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Seguro</h4>
+                        <p>Dados encriptados e protegidos com os melhores padrões de segurança.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Intuitivo</h4>
+                        <p>Interface limpa e intuitiva, sem necessidade de manual.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-zap"></i>
+                        <h4>Rápido</h4>
+                        <p>Carregamento instantâneo e sincronização em tempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="servicos" id="servicos">
+        <div class="container">
+            <h2>Nossos Serviços</h2>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Horário Académico</h3>
+                    <p>Consulte seu horário de aulas em tempo real, com notificações de alterações e lembretes automáticos.</p>
+                    <ul class="features-list">
+                        <li>Visualização por dia ou semana</li>
+                        <li>Notificações push</li>
+                        <li>Sincronização com calendário</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Notas e Classificações</h3>
+                    <p>Acompanhe seu desempenho académico com acesso instantâneo às suas notas e classificações.</p>
+                    <ul class="features-list">
+                        <li>Histórico completo de notas</li>
+                        <li>Cálculo de média automático</li>
+                        <li>Gráficos de desempenho</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Exames e Prazos</h3>
+                    <p>Fique sempre informado sobre datas de exames, prazos de submissão e eventos importantes.</p>
+                    <ul class="features-list">
+                        <li>Calendário de exames</li>
+                        <li>Alertas de prazos</li>
+                        <li>Locais e horários</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Comunicados e Avisos</h3>
+                    <p>Receba comunicações importantes da instituição de forma centralizada e organizada.</p>
+                    <ul class="features-list">
+                        <li>Notificações personalizadas</li>
+                        <li>Filtro por categoria</li>
+                        <li>Arquivo de mensagens</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Dashboard Personalizado</h3>
+                    <p>Painel inicial que agrupa todas as informações mais relevantes para você.</p>
+                    <ul class="features-list">
+                        <li>Resumo diário</li>
+                        <li>Widgets personalizáveis</li>
+                        <li>Modo escuro/claro</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Perfil e Dados</h3>
+                    <p>Gerencie suas informações académicas e pessoais de forma segura.</p>
+                    <ul class="features-list">
+                        <li>Dados pessoais seguros</li>
+                        <li>Privacidade controlada</li>
+                        <li>Preferências customizáveis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como faço download da App?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Pode descarregar a App Maieutica a partir da App Store (iOS) ou Google Play Store (Android). Procure por "App Maieutica" ou use o código QR disponível no nosso site.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>É segura a minha informação?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Utilizamos encriptação de dados (SSL/TLS) e mantemos os mais altos padrões de segurança. Todos os dados são armazenados em servidores seguros e protegidos por políticas rigorosas de privacidade.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quanto custa usar a App?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A App Maieutica é completamente gratuita para todos os estudantes. O acesso é fornecido pela sua instituição de ensino.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Preciso de internet para usar?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A App funciona melhor com internet, mas suporta sincronização offline. Você pode visualizar informações já carregadas mesmo sem conexão.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Qual é a minha instituição suportada?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A App Maieutica está disponível em várias instituições de ensino. Consulte a lista de instituições suportadas na secção "FAC's" ou contacte-nos para mais informações.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como reportar um problema?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Pode reportar problemas através da opção "Suporte" dentro da App, ou enviando um email para support@appmaieutica.pt com uma descrição detalhada do problema.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTITUIÇÕES -->
+    <section class="instituicoes" id="instituicoes">
+        <div class="container">
+            <h2>Instituições Parceiras</h2>
+            <p class="instituicoes-subtitle">Trusted by Educational Institutions Across Portugal</p>
+            <div class="instituicoes-grid">
+                <div class="instituicao-card">
+                    <div class="instituicao-logo">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Instituto Politécnico da Maia</h3>
+                    <p class="instituicao-location"><i class="fas fa-map-marker-alt"></i> Maia</p>
+                    <p>Instituição parceira principal no desenvolvimento e validação da plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto" id="contacto">
+        <div class="container">
+            <h2>Entre em Contacto</h2>
+            <div class="contacto-content">
+                <div class="contacto-info">
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:support@appmaieutica.pt">support@appmaieutica.pt</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p><a href="tel:+351220000000">+351 220 000 000</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Localização</h4>
+                            <p>Instituto Politécnico da Maia<br>Maia, Portugal</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horário</h4>
+                            <p>Seg - Sex: 09:00 - 17:00<br>Sábado e Domingo: Fechado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contacto-form" id="contactoForm">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assunto">Assunto</label>
+                        <input type="text" id="assunto" name="assunto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>App Maieutica</h4>
+                    <p>Sua vida académica simplificada.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/appmaieutica/" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/appmaieutica" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/appmaieutica" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/appmaieutica" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                        <li><a href="#sobre" onclick="scrollToSection('sobre')">Sobre Nós</a></li>
+                        <li><a href="#servicos" onclick="scrollToSection('servicos')">Serviços</a></li>
+                        <li><a href="#faq" onclick="scrollToSection('faq')">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Política de Privacidade</a></li>
+                        <li><a href="cookies-policy.html">Política de Cookies</a></li>
+                        <li><a href="#contacto" onclick="scrollToSection('contacto')">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Descarregar</h4>
+                    <div class="app-links">
+                        <a href="#" class="app-badge">
+                            <i class="fab fa-apple"></i>
+                            <span>App Store</span>
+                        </a>
+                        <a href="#" class="app-badge">
+                            <i class="fab fa-google-play"></i>
+                            <span>Google Play</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 App Maieutica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="website-script.js"></script>
+</body>
+</html>

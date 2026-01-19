@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPMAIA Student App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- APP PHONE FRAME -->
+    <div class="phone-frame" id="phoneFrame">
+        <div class="phone-notch"></div>
+
+        <div class="status-bar">
+            <div>09:45</div>
+            <div class="status-icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <div class="app-content">
+            <!-- SPLASH SCREEN -->
+            <div class="screen active" id="splash">
+                <div class="splash-screen-content">
+                    <div style="flex: 0;"></div>
+
+                    <div class="splash-hero">
+                        <div class="splash-logos">
+                            <div class="splash-logo">
+                                <img src="assets/ipmaia.png" alt="IPMAIA Logo">
+                            </div>
+                            <div class="splash-logo">
+                                <img src="assets/umaia.png" alt="UMAIA Logo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="splash-content">
+                        <h1 class="splash-title">Bem-vindo!</h1>
+                        <div class="splash-accent"></div>
+                        <p class="splash-subtitle">Instituto Politécnico da Maia</p>
+                        <button class="splash-button" onclick="startApp(this)">
+                            Continuar
+                        </button>
+                    </div>
+
+                    <p class="splash-footer">Seu acesso à vida académica</p>
+                </div>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="screen" id="login">
+                <div class="login-container">
+                    <div class="login-logos">
+                        <div class="login-logo">
+                            <img src="assets/ipmaia.png" alt="IPMAIA Logo">
+                        </div>
+                        <div class="login-logo">
+                            <img src="assets/umaia.png" alt="UMAIA Logo">
+                        </div>
+                    </div>
+
+                    <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group" id="usernameGroup">
+                            <input type="text" id="username" placeholder=" " required autocomplete="off" value="21903456">
+                            <label for="username">Número Institucional</label>
+                            <div class="form-helper">Número institucional – 8 dígitos</div>
+                            <div class="form-error" id="usernameError">Número institucional inválido</div>
+                        </div>
+
+                        <div class="form-group" id="passwordGroup">
+                            <input type="password" id="password" placeholder=" " required autocomplete="off" value="1234">
+                            <label for="password">Palavra-passe</label>
+                            <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Mostrar palavra-passe">
+                                <i class="fas fa-eye" id="passwordIcon"></i>
+                            </button>
+                            <div class="form-helper">Sua palavra-passe segura</div>
+                            <div class="form-error" id="passwordError">Credenciais inválidas</div>
+                        </div>
+
+                        <button type="submit" class="login-button" id="loginBtn">
+                            <span class="button-text">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Entrar</span>
+                            </span>
+                            <span class="spinner"></span>
+                        </button>
+                    </form>
+
+                    <div class="login-hint">
+                        <strong>Demo:</strong> 21903456 / 1234
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOME -->
+            <div class="screen first-entry" id="home">
+                <div class="screen-header">
+                    <h2>Home</h2>
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="screen-body">
+                    <div class="greeting">
+                        <h2>Bom dia, <span id="studentName">João</span>.</h2>
+                        <p>Sexta-feira, 10 de janeiro</p>
+                        <a href="#" class="greeting-cta" onclick="switchTab('horario'); return false;">
+                            Ver atividades de hoje <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="section-title priority">Próxima aula</div>
+                    <div class="card next-class" id="nextClass">
+                        <h3>Bases de Dados</h3>
+                        <p><i class="fas fa-clock"></i> Hoje, às 10:30 · Sala 301</p>
+                        <a href="#" class="card-cta" onclick="switchTab('horario'); return false;">
+                            Ver detalhes da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="section-title priority">Comunicados recentes</div>
+                    <div class="news-item unread" id="comunicado-1" data-id="1">
+                        <div class="news-title">Aulas suspensas amanhã</div>
+                        <div class="news-date">Comunicado institucional · Hoje às 14:00</div>
+                    </div>
+                    <a href="#" class="section-cta" onclick="switchTab('comunicados'); return false;">
+                        Ver todos os comunicados <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                    <div class="section-title">Resumo académico</div>
+                    <div class="stat-card" id="statMedia">
+                        <div class="stat-value" data-target="8.5">0</div>
+                        <div class="stat-label">Média geral</div>
+                        <div class="stat-description">Situação regular</div>
+                    </div>
+
+                    <div class="stat-card" id="statPresenca">
+                        <div class="stat-value" data-target="95">0</div>
+                        <div class="stat-label">Presença</div>
+                        <div class="stat-description">Dentro dos limites regulamentares</div>
+                    </div>
+                    <a href="#" class="section-cta" onclick="switchTab('notas'); return false;">
+                        Consultar desempenho académico <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- HORÁRIO -->
+            <div class="screen" id="horario">
+                <div class="screen-header">
+                    <h2>Horário</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="card past-class">
+                        <h3>08:00 – Programação Web (Front-End)</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Artur Jorge</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Laboratório 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card current-class">
+                        <span class="class-badge current">Em curso</span>
+                        <h3>10:00 – Bases de Dados</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Mário Henriques</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sala 301</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-cta" onclick="event.stopPropagation(); alert('Conteúdos: Normalização de bases de dados (3FN e BCNF), Índices e otimização de queries'); return false;">
+                            Ver conteúdos da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="card break-card">
+                        <h3>12:00 – Pausa para almoço</h3>
+                    </div>
+
+                    <div class="card">
+                        <span class="class-badge next">Próxima</span>
+                        <h3>13:00 – Computação na Nuvem</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Pedro Proença</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Laboratório 2</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-cta" onclick="event.stopPropagation(); alert('Conteúdos: Arquiteturas serverless com AWS Lambda, Containerização com Docker'); return false;">
+                            Ver conteúdos da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="card">
+                        <h3>15:00 – Marketing e Comunicação Digital</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Carla Amorim</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sala 205</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-cta" onclick="event.stopPropagation(); alert('Conteúdos: SEO e SEM para e-commerce, Google Analytics 4 e métricas de conversão'); return false;">
+                            Ver conteúdos da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTAS -->
+            <div class="screen" id="notas">
+                <div class="screen-header">
+                    <h2>Notas</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="note-empty" id="notesEmpty">Sem notas disponíveis no momento.</div>
+                    <div class="note-empty" id="notePending">Nota ainda não lançada.</div>
+
+                    <div class="card note-card">
+                        <h3>Programação Web (Front-End)</h3>
+                        <div class="note-row">
+                            <span class="note-label">Nota</span>
+                            <span class="note-value">16.5</span>
+                        </div>
+                    </div>
+                    <div class="card note-card">
+                        <h3>Bases de Dados</h3>
+                        <div class="note-row">
+                            <span class="note-label">Nota</span>
+                            <span class="note-value">15.0</span>
+                        </div>
+                    </div>
+                    <div class="card note-card">
+                        <h3>Computação na Nuvem</h3>
+                        <div class="note-row">
+                            <span class="note-label">Nota</span>
+                            <span class="note-value">17.5</span>
+                        </div>
+                    </div>
+                    <div class="card note-card">
+                        <h3>Marketing e Comunicação Digital</h3>
+                        <div class="note-row">
+                            <span class="note-label">Nota</span>
+                            <span class="note-value">14.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAMES -->
+            <div class="screen" id="exames">
+                <div class="screen-header">
+                    <h2>Exames</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="card">
+                        <h3>📅 Programação Web (Front-End)</h3>
+                        <p>15 de Janeiro • 10:00 • Sala 201</p>
+                    </div>
+                    <div class="card">
+                        <h3>📅 Bases de Dados</h3>
+                        <p>18 de Janeiro • 14:00 • Sala 301</p>
+                    </div>
+                    <div class="card">
+                        <h3>✓ Computação na Nuvem</h3>
+                        <p>8 de Janeiro • Classificação: 17.5</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMUNICADOS -->
+            <div class="screen" id="comunicados">
+                <div class="screen-header">
+                    <h2>Comunicados</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="news-item">
+                        <div class="news-title">Aulas suspensas amanhã</div>
+                        <div class="news-date">Hoje às 14:00</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Datas de Exames Confirmadas</div>
+                        <div class="news-date">Ontem</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Período de Notas Aberto</div>
+                        <div class="news-date">Há 3 dias</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Manutenção do Sistema</div>
+                        <div class="news-date">Há 5 dias</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL -->
+            <div class="screen" id="perfil">
+                <div class="screen-header">
+                    <h2>Perfil</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h2 id="profileName">João Silva</h2>
+                        <p id="profileNum">Número: 21903456</p>
+                    </div>
+
+                    <div class="profile-logo">
+                        <img src="assets/umaia.png" alt="UMAIA Logo" style="width: 100%; max-width: 80px;">
+                    </div>
+
+                    <div class="section-title">Informações</div>
+                    <div class="profile-item">
+                        <span class="label">Curso</span>
+                        <span class="value">Tecnologias Digitais</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Ano</span>
+                        <span class="value">1º</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Turma</span>
+                        <span class="value">T1-A</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Email</span>
+                        <span class="value">joao@mail.com</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Instituição</span>
+                        <span class="value">IPMAIA</span>
+                    </div>
+
+                    <button class="logout-card" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Terminar Sessão
+                    </button>
+
+                    <div class="social-links-container">
+                        <div class="section-title" style="margin-top: 20px;">Ligações Úteis</div>
+                        <a href="https://www.instagram.com/appmaieutica/" target="_blank" class="social-link-card">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram da App</span>
+                        </a>
+                        <a href="website-index.html" class="social-link-card">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Sobre a App</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav" id="bottomNav" style="display: none;">
+            <div class="nav-item active" onclick="switchTab('home')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('horario')">
+                <i class="fas fa-calendar"></i>
+                <span>Horário</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('notas')">
+                <i class="fas fa-star"></i>
+                <span>Notas</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('exames')">
+                <i class="fas fa-book"></i>
+                <span>Exames</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('comunicados')">
+                <i class="fas fa-bell"></i>
+                <span>Avisos</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('perfil')">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </div>
+        </div>
+
+        <div class="home-indicator"></div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

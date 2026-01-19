@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPMAIA Student App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8fbff;
+            --bg-secondary: #e6f4ff;
+            --bg-card: #ffffff;
+            --text-primary: #0b1930;
+            --text-secondary: #3b4a5c;
+            --border-color: #d5e8ff;
+            --body-bg: #ffffff;
+        }
+
+        html.dark-mode {
+            --bg-primary: #0a1022;
+            --bg-secondary: #0f1630;
+            --bg-card: #131c35;
+            --text-primary: #e8f2ff;
+            --text-secondary: #c0cee5;
+            --border-color: #182238;
+            --body-bg: #05070f;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: var(--body-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ===== SPLASH SCREEN ===== */
+        .splash-screen-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 36px 24px 32px;
+            height: 100%;
+            width: 100%;
+            gap: 24px;
+            background: linear-gradient(135deg, #0096d3 0%, #00b8f0 100%);
+            overflow: hidden;
+        }
+
+        .splash-screen-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120% 60% at 50% 0%, rgba(0, 44, 88, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+
+        .splash-hero {
+            position: relative;
+            width: 100%;
+            max-width: 260px;
+            padding: 18px 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            backdrop-filter: blur(6px);
+        }
+
+        .splash-logos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .splash-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .splash-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .splash-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+            letter-spacing: -0.6px;
+        }
+
+        .splash-subtitle {
+            font-size: 15px;
+            color: #e6f7ff;
+            margin-bottom: 8px;
+            letter-spacing: 0.35px;
+            font-weight: 600;
+        }
+
+        .splash-subtitle-secondary {
+            font-size: 13px;
+            color: #b3e5ff;
+            margin-bottom: 18px;
+            letter-spacing: 0.2px;
+            font-weight: 600;
+        }
+
+        .splash-accent {
+            width: 42px;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+            margin: -2px 0 12px;
+        }
+
+        .splash-button {
+            position: relative;
+            padding: 14px 32px;
+            min-width: 220px;
+            background: linear-gradient(135deg, #00a8e6 0%, #00c9ff 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 26px rgba(0, 153, 204, 0.35);
+            letter-spacing: 0.35px;
+            overflow: hidden;
+        }
+
+        .splash-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(0, 153, 204, 0.42);
+        }
+
+        .splash-button:active {
+            transform: scale(0.985);
+            box-shadow: 0 6px 16px rgba(0, 153, 204, 0.4);
+            color: #dff2ff;
+        }
+
+        .splash-button .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: text-bottom;
+        }
+
+        .splash-button.loading {
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .splash-footer {
+            font-size: 12px;
+            color: #e6f7ff;
+            opacity: 0.95;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: var(--bg-primary);
+            border-radius: 50px;
+            border: 12px solid #1a1a1a;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 30px 30px;
+            z-index: 10;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #0088bb 0%, #00a8d8 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            z-index: 9;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .app-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--bg-primary);
+        }
+
+        .screen {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+        }
+
+        /* Home Entry States */
+        #home.first-entry .screen-header,
+        #home.first-entry .greeting,
+        #home.first-entry .section-title,
+        #home.first-entry .stat-card,
+        #home.first-entry .card,
+        #home.first-entry .news-item {
+            opacity: 0;
+        }
+
+        #home.first-entry.active .screen-header,
+        #home.first-entry.active .greeting,
+        #home.first-entry.active .section-title,
+        #home.first-entry.active .stat-card,
+        #home.first-entry.active .card,
+        #home.first-entry.active .news-item {
+            animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        #home.first-entry.active .screen-header {
+            animation-delay: 0ms;
+        }
+
+        #home.first-entry.active .greeting {
+            animation-delay: 80ms;
+        }
+
+        #home.first-entry.active .section-title:nth-of-type(2) {
+            animation-delay: 160ms;
+        }
+
+        #home.first-entry.active .stat-card:nth-of-type(3) {
+            animation-delay: 200ms;
+        }
+
+        #home.first-entry.active .stat-card:nth-of-type(4) {
+            animation-delay: 240ms;
+        }
+
+        #home.first-entry.active .section-title.priority:nth-of-type(5) {
+            animation-delay: 280ms;
+        }
+
+        #home.first-entry.active .card.next-class {
+            animation-delay: 320ms;
+        }
+
+        #home.first-entry.active .section-title.priority:nth-of-type(7) {
+            animation-delay: 360ms;
+        }
+
+        #home.first-entry.active .news-item {
+            animation-delay: 400ms;
+        }
+
+        /* ===== LOGIN SCREEN ===== */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            height: 100%;
+            background: linear-gradient(135deg, #0099cc 0%, #00b8f0 100%);
+        }
+
+        .login-logos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+
+        .login-logo {
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #64748b;
+            pointer-events: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        html.dark-mode .form-group label {
+            background: #1a2847;
+            color: #7a9bc3;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            padding-right: 44px;
+            border: 2px solid #e2e8f0;
+            background: #ffffff;
+            color: #0f172a;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            letter-spacing: 0.2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
+
+        .form-group input::placeholder {
+            color: transparent;
+        }
+
+        .form-group input:focus,
+        .form-group input:not(:placeholder-shown) {
+            padding-top: 22px;
+            padding-bottom: 10px;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            top: -8px;
+            left: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #0099cc;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0099cc;
+            box-shadow: 0 0 0 4px rgba(0, 153, 204, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group.error input {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .form-group.error label {
+            color: #dc2626;
+        }
+
+        .form-group.success input {
+            border-color: #10b981;
+        }
+
+        .form-helper {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 6px;
+            padding-left: 4px;
+            line-height: 1.4;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #fecaca;
+            margin-top: 6px;
+            padding-left: 4px;
+            display: none;
+            line-height: 1.4;
+        }
+
+        .form-group.error .form-error {
+            display: block;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 6px;
+            transition: color 0.2s;
+            font-size: 16px;
+        }
+
+        .password-toggle:hover {
+            color: #64748b;
+        }
+
+        .login-button {
+            width: 100%;
+            min-height: 50px;
+            padding: 0 20px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-button:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(14, 165, 233, 0.5);
+            background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+        }
+
+        .login-button:active:not(:disabled) {
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.35);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+            box-shadow: none;
+        }
+
+        .login-button.loading {
+            pointer-events: none;
+        }
+
+        .login-button .button-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .login-button.loading .button-text {
+            opacity: 0;
+        }
+
+        .login-button .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            opacity: 0;
+        }
+
+        .login-button.loading .spinner {
+            opacity: 1;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+            20%, 40%, 60%, 80% { transform: translateX(4px); }
+        }
+
+        .login-form.shake {
+            animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+        }
+
+        .login-hint {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            margin-top: 32px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-hint strong {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ===== APP SCREENS ===== */
+        .screen-header {
+            background: linear-gradient(135deg, #0099cc 0%, #00b8e6 100%);
+            color: white;
+            padding: 12px 20px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 153, 204, 0.1);
+        }
+
+        .screen-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            opacity: 0.95;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.95);
+            border: none;
+            padding: 6px 9px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+        }
+
+        .theme-toggle:active {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(0.95);
+        }
+
+        .logout-card {
+            width: 100%;
+            margin-top: 24px;
+            padding: 15px 16px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+        }
+
+        .screen-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 18px 24px 18px;
+            background: var(--bg-primary);
+        }
+
+        .screen-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .screen-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .screen-body::-webkit-scrollbar-thumb {
+            background: var(--text-secondary);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid #f97316;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+            letter-spacing: 0.1px;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .card.next-class {
+            padding: 18px;
+            border-left-width: 2px;
+            border-left-color: rgba(8, 145, 178, 0.2);
+            margin-bottom: 16px;
+        }
+
+        .card.next-class h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .card.next-class p {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .card.next-class p i {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .card.current-class {
+            border-left: none;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .card.past-class {
+            opacity: 0.78;
+        }
+
+        .card.break-card {
+            border-left: none;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            opacity: 0.85;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .card.break-card:active {
+            transform: none;
+        }
+
+        .class-badge {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 999px;
+            font-size: 9.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 6px;
+            border: 1px solid transparent;
+        }
+
+        .class-badge.current {
+            background: rgba(16, 185, 129, 0.1);
+            color: #0f9f75;
+            border-color: rgba(16, 185, 129, 0.16);
+        }
+
+        .class-badge.next {
+            background: rgba(249, 115, 22, 0.12);
+            color: #c0561a;
+            border-color: rgba(249, 115, 22, 0.18);
+        }
+
+        .class-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .class-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #5b6472;
+        }
+
+        .class-meta-item i {
+            font-size: 11px;
+            opacity: 0.45;
+            width: 14px;
+        }
+
+        /* Horário – refinamento de estados e cores */
+        #horario .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        }
+
+        html.dark-mode #horario .card {
+            background: #131c35;
+            border-color: #182238;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        #horario .card h3 {
+            color: #0f172a;
+            font-weight: 700;
+            letter-spacing: -0.1px;
+        }
+
+        html.dark-mode #horario .card h3 {
+            color: #e8f2ff;
+        }
+
+        #horario .card.current-class {
+            border-color: rgba(16, 185, 129, 0.2);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.12);
+        }
+
+        #horario .card.past-class {
+            background: #f9fafb;
+            border-color: #e5e7eb;
+            box-shadow: none;
+        }
+
+        #horario .card.break-card {
+            background: #f8fafc;
+            border-color: #e2e8f0;
+            box-shadow: none;
+        }
+
+        #horario .card .card-cta {
+            color: #2563eb;
+            display: none;
+            opacity: 0.85;
+        }
+
+        #horario .card.current-class .card-cta,
+        #horario .card .class-badge.next ~ .card-cta {
+            display: inline-flex;
+        }
+
+        #horario .card .card-cta:hover {
+            opacity: 1;
+        }
+
+        /* Notas – hierarquia, acentos suaves e interação */
+        #notas .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-left: 2px solid rgba(249, 115, 22, 0.28);
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+        }
+
+        #notas .card h3 {
+            margin-bottom: 10px;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        html.dark-mode #notas .card {
+            background: #131c35;
+            border-color: #182238;
+        }
+
+        html.dark-mode #notas .card h3 {
+            color: #e8f2ff;
+        }
+
+        .note-row {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .note-label {
+            font-size: 11px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        html.dark-mode .note-label {
+            color: #a0c5e0;
+        }
+
+        .note-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.2px;
+        }
+
+        html.dark-mode .note-value {
+            color: #e8f2ff;
+        }
+
+        .note-card {
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .note-card:active {
+            transform: scale(0.985);
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+        }
+
+        .note-empty {
+            display: none;
+            background: #ffffff;
+            border: 1px dashed #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            color: #475569;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .note-card {
+                transition: none;
+            }
+
+            .note-card:active {
+                transform: none;
+            }
+        }
+
+        .bottom-nav {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 24px 0;
+            flex-shrink: 0;
+            box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            color: #9ca3af;
+            font-size: 10px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            flex: 1;
+            opacity: 0.7;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #0891b2;
+            opacity: 1;
+        }
+
+        .nav-item.active i {
+            font-size: 22px;
+        }
+
+        .nav-item:active {
+            transform: scale(0.95);
+        }
+
+        .home-indicator {
+            height: 5px;
+            background: #000;
+            border-radius: 2.5px;
+            margin: 8px auto;
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+            border: 1.5px solid #f59e0b;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        .stat-description {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            opacity: 0.6;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        .greeting {
+            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(8, 145, 178, 0.15);
+        }
+
+        .greeting h2 {
+            font-size: 20px;
+            margin-bottom: 4px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+        }
+
+        .greeting h2 span {
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .greeting-emoji {
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+        .greeting-emoji.wave {
+            animation: wave 0.6s ease-in-out;
+            transform-origin: 70% 70%;
+        }
+
+        .greeting p {
+            font-size: 13px;
+            opacity: 0.85;
+            letter-spacing: 0.1px;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .greeting-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            margin-top: 10px;
+            padding: 6px 12px 6px 0;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .greeting-cta:hover {
+            color: #ffffff;
+            gap: 6px;
+        }
+
+        .greeting-cta i {
+            font-size: 10px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin: 28px 0 12px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            opacity: 0.6;
+        }
+
+        .section-title.priority {
+            font-size: 12px;
+            color: var(--text-primary);
+            opacity: 0.75;
+            margin-top: 24px;
+        }
+
+        .section-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #0891b2;
+            text-decoration: none;
+            margin-top: 12px;
+            padding: 4px 0;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            opacity: 0.8;
+        }
+
+        .section-cta:hover {
+            opacity: 1;
+            gap: 6px;
+        }
+
+        .section-cta i {
+            font-size: 9px;
+        }
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #0891b2;
+            text-decoration: none;
+            margin-top: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            opacity: 0.75;
+        }
+
+        .card-cta:hover {
+            opacity: 1;
+            gap: 6px;
+        }
+
+        .card-cta i {
+            font-size: 10px;
+        }
+
+
+        .news-item {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid #a855f7;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .news-item.unread::before {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #a855f7;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+        }
+
+        .news-item.unread {
+            background: rgba(168, 85, 247, 0.03);
+        }
+
+        .news-item:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .news-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+            letter-spacing: 0.1px;
+            line-height: 1.4;
+        }
+
+        .news-date {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #0099cc 0%, #00b8e6 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin: 0 -15px 15px -15px;
+            box-shadow: 0 4px 15px rgba(0, 153, 204, 0.2);
+        }
+
+        .profile-avatar {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .profile-header h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .profile-header p {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .profile-logo {
+            width: 80px;
+            height: 80px;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- APP PHONE FRAME -->
+    <div class="phone-frame" id="phoneFrame">
+        <div class="phone-notch"></div>
+
+        <div class="status-bar">
+            <div>09:45</div>
+            <div class="status-icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <div class="app-content">
+            <!-- SPLASH SCREEN -->
+            <div class="screen active" id="splash">
+                <div class="splash-screen-content">
+                    <div style="flex: 0;"></div>
+
+                    <div class="splash-hero">
+                        <div class="splash-logos">
+                            <div class="splash-logo">
+                                <img src="assets/ipmaia.png" alt="IPMAIA Logo">
+                            </div>
+                            <div class="splash-logo">
+                                <img src="assets/umaia.png" alt="UMAIA Logo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="splash-content">
+                        <h1 class="splash-title">Bem-vindo!</h1>
+                        <div class="splash-accent"></div>
+                        <p class="splash-subtitle">Universidade da Maia</p>
+                        <p class="splash-subtitle-secondary">Instituto Politécnico da Maia</p>
+                        <button class="splash-button" onclick="startApp(this)">
+                            Continuar
+                        </button>
+                    </div>
+
+                    <p class="splash-footer">Seu acesso à vida académica</p>
+                </div>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="screen" id="login">
+                <div class="login-container">
+                    <div class="login-logos">
+                        <div class="login-logo">
+                            <img src="assets/ipmaia.png" alt="IPMAIA Logo">
+                        </div>
+                        <div class="login-logo">
+                            <img src="assets/umaia.png" alt="UMAIA Logo">
+                        </div>
+                    </div>
+
+                    <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group" id="usernameGroup">
+                            <input type="text" id="username" placeholder=" " required autocomplete="off" value="21903456">
+                            <label for="username">Número Institucional</label>
+                            <div class="form-helper">Número institucional – 8 dígitos</div>
+                            <div class="form-error" id="usernameError">Número institucional inválido</div>
+                        </div>
+
+                        <div class="form-group" id="passwordGroup">
+                            <input type="password" id="password" placeholder=" " required autocomplete="off" value="1234">
+                            <label for="password">Palavra-passe</label>
+                            <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Mostrar palavra-passe">
+                                <i class="fas fa-eye" id="passwordIcon"></i>
+                            </button>
+                            <div class="form-helper">Sua palavra-passe segura</div>
+                            <div class="form-error" id="passwordError">Credenciais inválidas</div>
+                        </div>
+
+                        <button type="submit" class="login-button" id="loginBtn">
+                            <span class="button-text">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Entrar</span>
+                            </span>
+                            <span class="spinner"></span>
+                        </button>
+                    </form>
+
+                    <div class="login-hint">
+                        <strong>Demo:</strong> 21903456 / 1234
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOME -->
+            <div class="screen first-entry" id="home">
+                <div class="screen-header">
+                    <h2>Home</h2>
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="screen-body">
+                    <div class="greeting">
+                        <h2>Bom dia, <span id="studentName">João</span>.</h2>
+                        <p>Sexta-feira, 10 de janeiro</p>
+                        <a href="#" class="greeting-cta" onclick="switchTab('horario'); return false;">
+                            Ver atividades de hoje <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="section-title priority">Próxima aula</div>
+                    <div class="card next-class" id="nextClass">
+                        <h3>Bases de Dados</h3>
+                        <p><i class="fas fa-clock"></i> Hoje, às 10:30 · Sala 301</p>
+                        <a href="#" class="card-cta" onclick="switchTab('horario'); return false;">
+                            Ver detalhes da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="section-title priority">Comunicados recentes</div>
+                    <div class="news-item unread" id="comunicado-1" data-id="1">
+                        <div class="news-title">Aulas suspensas amanhã</div>
+                        <div class="news-date">Comunicado institucional · Hoje às 14:00</div>
+                    </div>
+                    <a href="#" class="section-cta" onclick="switchTab('comunicados'); return false;">
+                        Ver todos os comunicados <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                    <div class="section-title">Resumo académico</div>
+                    <div class="stat-card" id="statMedia">
+                        <div class="stat-value" data-target="8.5">0</div>
+                        <div class="stat-label">Média geral</div>
+                        <div class="stat-description">Situação regular</div>
+                    </div>
+
+                    <div class="stat-card" id="statPresenca">
+                        <div class="stat-value" data-target="95">0</div>
+                        <div class="stat-label">Presença</div>
+                        <div class="stat-description">Dentro dos limites regulamentares</div>
+                    </div>
+                    <a href="#" class="section-cta" onclick="switchTab('notas'); return false;">
+                        Consultar desempenho académico <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- HORÁRIO -->
+            <div class="screen" id="horario">
+                <div class="screen-header">
+                    <h2>Horário</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="card past-class" onclick="openCourseDetail('prog-web')">
+                        <h3>08:00 – Programação Web (Front-End)</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Artur Jorge</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Laboratório 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card current-class" onclick="openCourseDetail('bases-dados')">
+                        <span class="class-badge current">Em curso</span>
+                        <h3>10:00 – Bases de Dados</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Mário Henriques</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sala 301</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-cta" onclick="event.stopPropagation(); openCourseDetail('bases-dados'); return false;">
+                            Ver conteúdos da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="card break-card">
+                        <h3>12:00 – Pausa para almoço</h3>
+                    </div>
+
+                    <div class="card" onclick="openCourseDetail('computacao-nuvem')">
+                        <span class="class-badge next">Próxima</span>
+                        <h3>13:00 – Computação na Nuvem</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Pedro Proença</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Laboratório 2</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-cta" onclick="event.stopPropagation(); openCourseDetail('computacao-nuvem'); return false;">
+                            Ver conteúdos da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="card" onclick="openCourseDetail('marketing-digital')">
+                        <h3>15:00 – Marketing e Comunicação Digital</h3>
+                        <div class="class-meta">
+                            <div class="class-meta-item">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Prof. Carla Amorim</span>
+                            </div>
+                            <div class="class-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sala 205</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-cta" onclick="event.stopPropagation(); openCourseDetail('marketing-digital'); return false;">
+                            Ver conteúdos da aula <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTAS -->
+            <div class="screen" id="notas">
+                <div class="screen-header">
+                    <h2>Notas</h2>
+                </div>
+                <div class="screen-body">
+                    <!-- Controlos de Filtro/Ordenação -->
+                    <div class="list-controls">
+                        <select id="notasSort" class="sort-select" onchange="filterAndSortNotes()">
+                            <option value="date-desc">Mais recentes</option>
+                            <option value="date-asc">Mais antigas</option>
+                            <option value="grade-desc">Maior nota</option>
+                            <option value="grade-asc">Menor nota</option>
+                            <option value="name">Disciplina (A-Z)</option>
+                        </select>
+                    </div>
+
+                    <!-- Estado Vazio -->
+                    <div class="empty-state" id="notasEmptyState" style="display: none;">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Nenhuma nota disponível</h3>
+                        <p>Ainda não há notas lançadas para as suas disciplinas.</p>
+                    </div>
+
+                    <!-- Lista de Notas -->
+                    <div id="notasContainer"></div>
+                </div>
+            </div>
+
+            <!-- EXAMES -->
+            <div class="screen" id="exames">
+                <div class="screen-header">
+                    <h2>Exames</h2>
+                </div>
+                <div class="screen-body">
+                    <!-- Controlos de Filtro/Ordenação -->
+                    <div class="list-controls">
+                        <div class="filter-chips">
+                            <button class="filter-chip active" data-filter="all" onclick="filterExams('all')">
+                                Todos
+                            </button>
+                            <button class="filter-chip" data-filter="scheduled" onclick="filterExams('scheduled')">
+                                Marcados
+                            </button>
+                            <button class="filter-chip" data-filter="completed" onclick="filterExams('completed')">
+                                Realizados
+                            </button>
+                        </div>
+                        <select id="examesSort" class="sort-select" onchange="filterAndSortExams()">
+                            <option value="date-asc">Próximos primeiro</option>
+                            <option value="date-desc">Mais antigos</option>
+                            <option value="grade-desc">Melhor nota</option>
+                            <option value="grade-asc">Pior nota</option>
+                        </select>
+                    </div>
+
+                    <!-- Estado Vazio -->
+                    <div class="empty-state" id="examesEmptyState" style="display: none;">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>Nenhum exame encontrado</h3>
+                        <p>Sem exames na categoria selecionada.</p>
+                    </div>
+
+                    <!-- Lista de Exames -->
+                    <div id="examesContainer"></div>
+                </div>
+            </div>
+
+            <!-- COMUNICADOS -->
+            <div class="screen" id="comunicados">
+                <div class="screen-header">
+                    <h2>Comunicados</h2>
+                </div>
+                <div class="screen-body">
+                    <!-- Controlos de Filtro/Ordenação -->
+                    <div class="list-controls">
+                        <div class="filter-chips">
+                            <button class="filter-chip active" data-filter="all" onclick="filterAnnouncements('all')">
+                                Todos
+                            </button>
+                            <button class="filter-chip" data-filter="academic" onclick="filterAnnouncements('academic')">
+                                Académicos
+                            </button>
+                            <button class="filter-chip" data-filter="administrative" onclick="filterAnnouncements('administrative')">
+                                Administrativos
+                            </button>
+                            <button class="filter-chip" data-filter="unread" onclick="filterAnnouncements('unread')">
+                                Não lidos
+                            </button>
+                        </div>
+                        <select id="announcementsSort" class="sort-select" onchange="filterAndSortAnnouncements()">
+                            <option value="date-desc">Mais recentes</option>
+                            <option value="date-asc">Mais antigas</option>
+                            <option value="status">Não lidos primeiro</option>
+                        </select>
+                    </div>
+
+                    <!-- Estado Vazio -->
+                    <div class="empty-state" id="announcementsEmptyState" style="display: none;">
+                        <i class="fas fa-envelope-open"></i>
+                        <h3>Nenhum comunicado encontrado</h3>
+                        <p>Sem comunicados na categoria selecionada.</p>
+                    </div>
+
+                    <!-- Lista de Comunicados -->
+                    <div id="announcementsContainer"></div>
+                </div>
+            </div>
+
+            <!-- CALENDÁRIO -->
+            <div class="screen" id="calendario">
+                <div class="screen-header">
+                    <h2>Calendário</h2>
+                </div>
+                <div class="screen-body">
+                    <!-- Controles de visualização -->
+                    <div class="calendar-controls">
+                        <div class="calendar-views">
+                            <button class="view-btn active" data-view="month" onclick="switchCalendarView('month')">
+                                <i class="fas fa-table"></i> Mês
+                            </button>
+                            <button class="view-btn" data-view="week" onclick="switchCalendarView('week')">
+                                <i class="fas fa-calendar-week"></i> Semana
+                            </button>
+                            <button class="view-btn" data-view="day" onclick="switchCalendarView('day')">
+                                <i class="fas fa-calendar-day"></i> Dia
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Navegação -->
+                    <div class="calendar-nav">
+                        <button class="nav-btn" onclick="navigateCalendar('prev')" aria-label="Mês anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="calendar-title" id="calendarTitle">Janeiro 2026</div>
+                        <button class="nav-btn" onclick="navigateCalendar('next')" aria-label="Próximo mês">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <button class="calendar-today-btn" onclick="navigateCalendar('today')">Hoje</button>
+
+                    <!-- Vistas -->
+                    <div class="calendar-view-container">
+                        <!-- Vista Mês -->
+                        <div class="calendar-view active" id="monthView">
+                            <div class="calendar-weekdays">
+                                <div class="weekday">Seg</div>
+                                <div class="weekday">Ter</div>
+                                <div class="weekday">Qua</div>
+                                <div class="weekday">Qui</div>
+                                <div class="weekday">Sex</div>
+                                <div class="weekday">Sab</div>
+                                <div class="weekday">Dom</div>
+                            </div>
+                            <div class="calendar-grid" id="calendarGrid"></div>
+                        </div>
+
+                        <!-- Vista Semana -->
+                        <div class="calendar-view" id="weekView">
+                            <div class="week-container" id="weekContainer"></div>
+                        </div>
+
+                        <!-- Vista Dia -->
+                        <div class="calendar-view" id="dayView">
+                            <div class="day-container" id="dayContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL -->
+            <div class="screen" id="perfil">
+                <div class="screen-header">
+                    <h2>Perfil</h2>
+                </div>
+                <div class="screen-body">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h2 id="profileName">João Silva</h2>
+                        <p id="profileNum">Número: 21903456</p>
+                    </div>
+
+                    <div class="profile-logo">
+                        <img src="assets/umaia.png" alt="UMAIA Logo" style="width: 100%; max-width: 80px;">
+                    </div>
+
+                    <div class="section-title">Informações</div>
+                    <div class="profile-item">
+                        <span class="label">Curso</span>
+                        <span class="value">Tecnologias Digitais</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Ano</span>
+                        <span class="value">1º</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Turma</span>
+                        <span class="value">T1-A</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Email</span>
+                        <span class="value">joao@mail.com</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="label">Instituição</span>
+                        <span class="value">IPMAIA</span>
+                    </div>
+
+                    <button class="logout-card" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Terminar Sessão
+                    </button>
+
+                    <div class="social-links-container">
+                        <div class="section-title" style="margin-top: 20px;">Ligações Úteis</div>
+                        <a href="https://www.instagram.com/appmaieutica/" target="_blank" class="social-link-card">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram da App</span>
+                        </a>
+                        <a href="website-index.html" class="social-link-card">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Sobre a App</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav" id="bottomNav" style="display: none;">
+            <div class="nav-item active" onclick="switchTab('home')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('horario')">
+                <i class="fas fa-calendar"></i>
+                <span>Horário</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('notas')">
+                <i class="fas fa-star"></i>
+                <span>Notas</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('calendario')">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Calendário</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('exames')">
+                <i class="fas fa-book"></i>
+                <span>Exames</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('comunicados')">
+                <i class="fas fa-bell"></i>
+                <span>Avisos</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('perfil')">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </div>
+        </div>
+
+        <div class="home-indicator"></div>
+    </div>
+
+    <!-- MODAL DETALHE DISCIPLINA -->
+    <div class="modal-overlay" id="courseDetailModal">
+        <div class="modal-content course-detail-modal">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <h2 id="courseDetailTitle">Disciplina</h2>
+                    <p id="courseDetailProfessor">Professor</p>
+                </div>
+                <button class="modal-close" onclick="closeCourseDetail()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="course-detail-meta">
+                <div class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="courseDetailLocation">Localização</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="courseDetailTime">Hora</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-book"></i>
+                    <span id="courseDetailCredits">Créditos</span>
+                </div>
+            </div>
+
+            <p id="courseDetailDescription" class="course-description"></p>
+
+            <!-- Abas -->
+            <div class="course-tabs">
+                <button class="tab-btn active" data-tab="contents" onclick="switchCourseTab('contents')">
+                    <i class="fas fa-file"></i> Conteúdos
+                </button>
+                <button class="tab-btn" data-tab="announcements" onclick="switchCourseTab('announcements')">
+                    <i class="fas fa-bell"></i> Comunicados
+                </button>
+                <button class="tab-btn" data-tab="feedback" onclick="switchCourseTab('feedback')">
+                    <i class="fas fa-comments"></i> Feedback
+                </button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="course-tab-content">
+                <!-- Aba Conteúdos -->
+                <div class="tab-panel active" id="contentsPanel">
+                    <div class="contents-list" id="contentsList"></div>
+                </div>
+
+                <!-- Aba Comunicados -->
+                <div class="tab-panel" id="announcementsPanel">
+                    <div class="announcements-list" id="announcementsList"></div>
+                </div>
+
+                <!-- Aba Feedback -->
+                <div class="tab-panel" id="feedbackPanel">
+                    <div class="feedback-content" id="feedbackContent"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeCourseDetail()">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div class="modal-overlay" id="confirmModal" aria-hidden="true">
+        <div class="modal-content confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <h2 id="confirmTitle">Confirmar ação</h2>
+                    <p id="confirmSubtitle">Por favor, confirme para continuar</p>
+                </div>
+                <button class="modal-close" onclick="closeConfirmModal()" aria-label="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p id="confirmMessage" class="confirm-message">Tem a certeza que deseja continuar?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" id="confirmCancelBtn">Cancelar</button>
+                <button class="btn-primary" id="confirmOkBtn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
