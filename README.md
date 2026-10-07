@@ -1,18 +1,18 @@
 # App Maiêutica: projeto académico
 
-Protótipo front-end desenvolvido no contexto da unidade curricular de **Marketing e Comunicação Digital**, acompanhado por um plano de marketing, um site de apresentação e uma peça de e-mail marketing. O projeto está a ser preparado para um portfólio de front-end e UX/UI, através de melhorias graduais sobre a entrega existente.
+Desenvolvi este protótipo front-end no contexto da unidade curricular de **Marketing e Comunicação Digital**. O projeto inclui um plano de marketing, um site de apresentação e uma peça de e-mail marketing. Estou a preparar esta entrega para o meu portfólio de front-end e UX/UI, melhorando o app aos poucos e mantendo as tecnologias existentes.
 
 ## O problema
 
-Na experiência académica que motivou o projeto, era necessário consultar o Moodle e o site da faculdade para encontrar informações sobre aulas, cancelamentos, trabalhos e avisos urgentes. A proposta é reunir essas informações num ponto de acesso mais simples e organizado.
+No meu dia a dia académico, consultava o Moodle e o site da faculdade para encontrar informações sobre aulas, cancelamentos, trabalhos e avisos urgentes. Foi dessa experiência que surgiu a ideia de reunir essas informações num ponto de acesso mais simples e organizado.
 
-O [Plano de Marketing Final](Plano%20Marketing%20Final.pdf), sobretudo nas secções de introdução, enquadramento e missão, fundamenta a centralização de horários, notas, avaliações e comunicados. O objetivo é facilitar a consulta da informação e melhorar a comunicação na comunidade académica.
+No [Plano de Marketing Final](Plano%20Marketing%20Final.pdf), que elaborei com o Ricardo Jesus, apresentamos a proposta de centralizar horários, notas, avaliações e comunicados. O nosso objetivo era facilitar a consulta da informação e melhorar a comunicação na comunidade académica.
 
 ## A proposta e o protótipo atual
 
-A proposta do plano prevê uma aplicação com informação académica centralizada, alertas e integração com os sistemas da instituição. O documento considera estudantes, docentes e encarregados de educação.
+No plano, propomos uma aplicação com informação académica centralizada, alertas e integração com os sistemas da instituição. Considerámos as necessidades de estudantes, docentes e encarregados de educação.
 
-A entrega neste repositório demonstra uma experiência de estudante no navegador, construída com **HTML, CSS e JavaScript**, com dados simulados definidos em `app ismai/data.js`.
+Neste protótipo, desenvolvi a experiência de estudante no navegador com **HTML, CSS e JavaScript**, usando dados simulados definidos em `app ismai/data.js`.
 
 - Consulta de informação académica, como disciplinas, horários, avaliações e comunicados.
 - Navegação entre ecrãs, login de demonstração e opções de interface, incluindo tema claro e escuro.
@@ -20,6 +20,10 @@ A entrega neste repositório demonstra uma experiência de estudante no navegado
 - Plano de marketing e plano de postagens como documentação de suporte.
 
 O login é uma simulação no navegador. Não existe ligação ao Moodle ou aos sistemas académicos, autenticação institucional real ou serviço de notificações em tempo real. A publicação em lojas de aplicações descrita no plano é uma intenção de distribuição, não uma funcionalidade entregue neste repositório.
+
+## Validação do protótipo
+
+Durante o desenvolvimento, testei o protótipo com alguns estudantes e com a docente. Verificámos tarefas como consultar o horário de aulas, os avisos importantes, o calendário e as notas. Concluímos que o protótipo cumpria os requisitos que tínhamos definido para o projeto.
 
 ## Como explorar
 
@@ -66,22 +70,22 @@ app-ismai-marketing/
 
 ## Evolução para o portfólio
 
-A [entrega original](https://github.com/AlefAmaral3/app-ismai-marketing/commit/9376d08d52c5d1c991ccb802af8b9be0569ccfc3) está preservada no primeiro commit. As melhorias seguintes serão registadas em novos commits, mantendo o app e as tecnologias existentes.
+Mantive a [entrega original](https://github.com/AlefAmaral3/app-ismai-marketing/commit/9376d08d52c5d1c991ccb802af8b9be0569ccfc3) no primeiro commit. Vou registar as próximas melhorias em novos commits, preservando o app e as tecnologias existentes.
 
-Próximas etapas planeadas:
+Os meus próximos passos são:
 
 - Analisar os percursos atuais e registar oportunidades de melhoria de usabilidade, acessibilidade e adaptação a diferentes ecrãs.
-- Aplicar **IBM Plex Sans**, escolhida para a evolução visual e ainda não aplicada à entrega original.
+- Aplicar **IBM Plex Sans**, a fonte que escolhi para esta fase e que ainda não apliquei ao app.
 - Refinar a interface gradualmente, documentando a razão de cada alteração e a forma de a verificar.
 - Construir o estudo de caso com contexto, decisões, comparações e resultados de validação, à medida que esse trabalho for realizado.
 
-Os benefícios descritos no plano são objetivos do projeto; este README não apresenta métricas de impacto ou testes de usabilidade como resultados já alcançados.
+Os benefícios que apresentamos no plano são objetivos do projeto. Nos testes informais, não recolhi métricas que permitam quantificar o impacto da proposta.
 
 ## Documentação e autoria
 
 - [Plano de Marketing Final](Plano%20Marketing%20Final.pdf)
 - [Plano de Postagens](app%20ismai/Plano_Postagens_App_Maieutica.pdf)
 
-O Plano de Marketing identifica **Alef Amaral e Ricardo Jesus** como autores do trabalho académico. A descrição das contribuições individuais para o desenvolvimento e o design será acrescentada ao estudo de caso após confirmação.
+Sou o **Alef Amaral** e elaborei o Plano de Marketing com o **Ricardo Jesus**, no âmbito do trabalho académico. Neste portfólio, vou documentar a evolução do protótipo e as decisões que tomar ao longo do processo.
 
 Este repositório apresenta um projeto académico; não constitui um serviço institucional em produção. O ficheiro [LICENSE](LICENSE) contém a licença MIT. Os nomes e elementos de identidade das instituições são utilizados no contexto do projeto académico.
