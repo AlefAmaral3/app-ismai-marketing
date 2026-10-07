@@ -1,4 +1,4 @@
-# App Maiêutica — projeto académico
+# App Maiêutica - projeto académico
 
 Protótipo front-end desenvolvido no contexto da unidade curricular de **Marketing e Comunicação Digital**, acompanhado por um plano de marketing, um site de apresentação e uma peça de e-mail marketing. O projeto está a ser preparado para um portfólio de front-end e UX/UI, através de melhorias graduais sobre a entrega existente.
 
